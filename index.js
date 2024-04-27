@@ -53,7 +53,7 @@ app.post('/delete-ip', async (req, res) => {
     res.status(500).send('Error interno del servidor');
   }
 });
-
+//agrgar ip desde el form de la pagina manual
 app.post('/add-ip', async (req, res) => {
   const { ip, reason } = req.body;
   try {
@@ -65,7 +65,18 @@ app.post('/add-ip', async (req, res) => {
   }
 });
 
-
+//agrgar ip desde link
+app.post('/add-ip-link/:ip/:reason', async (req, res) => {
+  const { ip, reason } = req.params;
+  try {
+    // Aquí puedes usar ip y reason para agregar a la base de datos
+    await client.query('INSERT INTO ip_blocked (ip_address, reason) VALUES ($1, $2)', [ip, reason]);
+    res.redirect('/');
+  } catch (err) {
+    console.error('Error al agregar la IP bloqueada:', err);
+    res.status(500).send('Error interno del servidor');
+  }
+});
 
 // Ruta para consultar si una IP existe en la base de datos
 app.get('/check-ip/:ipAddress', async (req, res) => {
