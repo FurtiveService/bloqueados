@@ -66,7 +66,7 @@ app.post('/add-ip', async (req, res) => {
 });
 
 //agrgar ip desde link
-app.post('/add-ip-link/:ip/:reason', async (req, res) => {
+app.get('/add-ip-link/:ip/:reason', async (req, res) => {
   const { ip, reason } = req.params;
   try {
     // Aquí puedes usar ip y reason para agregar a la base de datos
