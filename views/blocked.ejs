@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listado de IP Bloqueadas</title>
+    <title>List</title>
 </head>
 <body>
-    <h1>Listado de IP Blzzzzoqueadas</h1>
+    <h1>List</h1>
     <ul>
         <% ipBlocked.forEach(ip => { %>
             <li>
                 <span><%= ip.ip_address %> - <%= ip.reason %></span>
                 <form action="/delete-ip" method="POST" style="display:inline;">
                     <input type="hidden" name="ip_id" value="<%= ip.id %>">
-                    <button type="submit">Eliminar</button>
+                    <button type="submit" style="border: none;color: white;background: white;">Eliminar</button>
                 </form>
             </li>
         <% }); %>
