@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const { Client } = require('pg');
 const cors = require('cors');
+const axios = require('axios');
 
 dotenv.config();
 const app = express();
@@ -42,6 +43,15 @@ app.get('/', async (req, res) => {
     res.status(500).send('Error interno del servidor');
   }
 });
+
+app.get('/getipvisit', (req, res) => {
+    // Obtener la IP del visitante
+    const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    res.json({ ip: ip });
+});
+
+
+
 
 app.post('/delete-ip', async (req, res) => {
   const ipId = req.body.ip_id;
@@ -101,6 +111,6 @@ app.use((err, req, res, next) => {
 });
 
 // Iniciar el servidor
-app.listen(PORT, HOST, () => {
+app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://${HOST}:${PORT}`);
 });
